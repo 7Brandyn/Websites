@@ -1,0 +1,83 @@
+*,
+*::before, 
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    height: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: mandatory;
+    background-color: hsl(0 0% 10%);
+    perspective: 1000px;
+    perspective-origin: 50% 35%;
+}
+
+.building {
+    transform-style: preserve-3d;
+}
+
+.room {
+    position: relative;
+    border: 4vmax solid hsl(0 0% 10%);
+    height: 80vh;
+    width: 100vw;
+    scroll-snap-align: center;
+    transform-style: preserve-3d;
+}
+
+.room::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+    background: radial-gradient(hsl(0 0% 100% / 10%),
+        hsl(0 0% 0% / 10%)), lightgray;
+    transform: rotateX(-90deg) scale(1.00);
+    transform-origin: center top;
+}
+
+.room::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+    bottom: 0px;
+    background: radial-gradient(hsl(0 0% 100% / 10%),
+        hsl(0 0% 0% / 10%)), 
+        url('./images/floor.jpg') center / cover, grey;
+    transform: rotateX(90deg);
+    transform-origin: center bottom;
+}
+
+.room_wall {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, hsl(0 0% 90%) 2.5vh, transparent 0),
+    radial-gradient(hsl(0 0% 0% / 30%), hsl(0 0% 0% / 50%)),
+    url('./images/front.jpg') center / cover, grey;
+    transform: translateZ(-510px);
+    transform-style: preserve-3d;
+}
+
+.room_wall::before {
+    content: '';
+    height: 100%;
+    width: 500px;
+    position: absolute;
+    right: 100%;
+    background: linear-gradient(to top, hsl(0 0% 75%) 2.5vh, transparent 0),
+    radial-gradient(hsl(0 0% 0% / 10%), hsl(0 0% 0% / 10%)),
+    url('./images/left.jpg') center / cover, gray;
+    transform: rotateY(90deg);
+    transform-origin: right-center;
+}
